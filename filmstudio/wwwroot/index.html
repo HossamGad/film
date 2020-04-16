@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Film Studio</title>
+</head>
+
+<body>
+	<h1>Film Studio</h1>
+	<ul id="list">
+	</ul>
+	<script>
+		const list = document.getElementById("list");
+		fetch("https://localhost:44306/api/Film")
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+
+				for (var i = 0; i < data.length; i++) {
+					const film = data[i];
+					const listItem = document.createElement("li");
+					const aLink = document.createElement("a");
+					aLink.href = "/details.html?id=" + film.FilmId;
+					aLink.innerHTML = film.Name;
+					listItem.appendChild(aLink);
+					list.appendChild(listItem);
+				}
+			});
+	</script>
+</body>
+
+</html>
